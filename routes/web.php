@@ -19,6 +19,7 @@ Route::prefix('admin')->group(function () {
 
     //Todas las rutas del recurso eventos
     Route::resource('eventos', EventoController::class);
+    Route::get('/eventos/delete/{evento}', [EventoController::class, 'delete'])->name('eventos.delete');
 });
 
 Route::prefix('web')->group(function () {
