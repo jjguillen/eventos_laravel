@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EventoCollection;
+use App\Http\Resources\EventoResource;
 use App\Models\Evento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -93,4 +95,13 @@ class EventoController extends Controller
         Evento::destroy($evento->id);
         return redirect()->route('eventos.index');;
     }
+
+    ///// API METHODS
+
+    public function api_index()
+    {
+        return new EventoCollection(Evento::paginate(3));
+    }
+
+
 }

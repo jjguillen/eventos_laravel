@@ -8,14 +8,13 @@
             <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Eventos</h1>
         </div>
 
-        <!-- Pricing Cards -->
         <section class="grid grid-cols-1 space-y-12 md:space-y-0 md:grid-cols-2 lg:grid-cols-3 md:gap-x-6 md:gap-6 pt-9">
             <!-- Pricing Card -->
             <div class="flex flex-col max-w-lg p-6 mx-auto text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 xl:p-8 dark:bg-gray-800 dark:text-white">
+                <img src="{{ asset($evento->url_imagen) }}" class="mb-4" />
                 <h3 class="mb-4 text-2xl font-semibold">{{ $evento->nombre }}</h3>
                 <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">{{ $evento->descripcion }}</p>
                 <div class="flex items-baseline my-8">
-
                     <span class="text-gray-500 dark:text-gray-400">{{ $evento->fecha }} / {{ $evento->hora }}</span>
                 </div>
                 <!-- List -->
