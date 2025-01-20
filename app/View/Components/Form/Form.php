@@ -13,7 +13,9 @@ class Form extends Component
      */
     public function __construct(
         public string $nombre,
-        public string $ruta)
+        public string $ruta,
+        public string $metodo = 'POST',
+    )
     {
         //
     }

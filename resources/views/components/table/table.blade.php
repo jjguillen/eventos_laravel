@@ -1,4 +1,4 @@
 
-<table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+<table class="min-w-full divide-y divide-gray-200 table-fixed">
     {{ $slot }}
 </table>

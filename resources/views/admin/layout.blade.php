@@ -6,31 +6,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class="bg-gray-50 dark:bg-gray-800">
+<body class="bg-gray-50">
 
-
-<nav class="fixed z-50 w-full bg-white border-b border-gray-200 sm:py-2 dark:bg-gray-800 dark:border-gray-700">
+<nav class="fixed z-50 w-full bg-white border-b border-gray-200 sm:py-2">
     <div class="container py-3 mx-auto">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start">
                 <a href="https://flowbite-admin-dashboard.vercel.app/" class="flex mr-4">
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">EVENTOS</span>
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap">EVENTOS</span>
                 </a>
                 <div class="hidden sm:flex sm:ml-6">
                     <ul class="flex space-x-8">
                         <li>
                             <a href="{{ route('eventos.index') }}"
-                               class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500"
+                               class="text-sm font-medium text-gray-700 hover:text-primary-700"
                                aria-current="page">Home</a>
                         </li>
                         <li>
-                            <a href="#"
-                               class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500"
+                            <a href="{{ route('usuarios.index') }}"
+                               class="text-sm font-medium text-gray-700 hover:text-primary-700"
                                aria-current="page">Usuarios</a>
                         </li>
                         <li>
                             <a href="#"
-                               class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500"
+                               class="text-sm font-medium text-gray-700 hover:text-primary-700"
                                aria-current="page">Inscripciones</a>
                         </li>
                     </ul>
@@ -44,24 +43,24 @@
         <ul class="pt-2">
             <li>
                 <a href="#"
-                   class="block py-2 pl-3 pr-4 text-base font-normal text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white">Dashboard</a>
+                   class="block py-2 pl-3 pr-4 text-base font-normal text-gray-900 bg-gray-100">Dashboard</a>
             </li>
             <li>
                 <a href="#"
-                   class="block px-3 py-2 text-base font-normal text-gray-600 border-b border-gray-100 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 dark:hover:text-white">Team</a>
+                   class="block px-3 py-2 text-base font-normal text-gray-600 border-b border-gray-100 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900">Team</a>
             </li>
             <li>
                 <a href="#"
-                   class="block px-3 py-2 text-base font-normal text-gray-600 border-b border-gray-100 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 dark:hover:text-white">Projects</a>
+                   class="block px-3 py-2 text-base font-normal text-gray-600 border-b border-gray-100 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900">Projects</a>
             </li>
             <li>
                 <a href="#"
-                   class="block px-3 py-2 text-base font-normal text-gray-600 border-b border-gray-100 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 dark:hover:text-white">Calendar
+                   class="block px-3 py-2 text-base font-normal text-gray-600 border-b border-gray-100 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900">Calendar
                 </a>
             </li>
             <li class="block">
                 <a href="#"
-                   class="inline-flex items-center w-full px-3 py-2 text-base font-normal text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900 dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 dark:hover:text-white">
+                   class="inline-flex items-center w-full px-3 py-2 text-base font-normal text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -74,14 +73,14 @@
     </div>
 </nav>
 
-<main class="bg-gray-50 dark:bg-gray-900">
+<main class="bg-gray-50">
     @yield('main')
 </main>
 
-<footer class="py-12 bg-white xl:py-24 dark:bg-gray-800">
+<footer class="py-12 bg-white xl:py-24">
     <div class="container px-4 mx-auto xl:px-0">
-        <hr class="my-8 border-gray-200 lg:my-12 dark:border-gray-700">
-        <span class="block text-center text-gray-600 dark:text-gray-400">© 2019-<span id="currentYear">2023</span> <a href="https://flowbite.com" target="_blank" rel="noreferrer">Flowbite</a>. All Rights Reserved.
+        <hr class="my-8 border-gray-200 lg:my-12">
+        <span class="block text-center text-gray-600">© 2019-<span id="currentYear">2023</span> <a href="https://flowbite.com" target="_blank" rel="noreferrer">Flowbite</a>. All Rights Reserved.
         </span>
     </div>
 </footer>

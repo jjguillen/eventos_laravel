@@ -10,3 +10,5 @@ Route::get('/user', function (Request $request) {
 
 
 Route::get('/eventos', [EventoController::class, 'api_index']);
+Route::get('/eventos/{evento}', [EventoController::class, 'api_show']);
+

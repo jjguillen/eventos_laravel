@@ -7,6 +7,7 @@ use App\Http\Resources\EventoResource;
 use App\Models\Evento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class EventoController extends Controller
 {
@@ -36,17 +37,29 @@ class EventoController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'fecha' => 'required|date|after:today',
-            'hora' => 'required|date_format:H:i',
+            'hora' => 'required|date_format:H:i:s',
             'aforo_maximo' => 'required|integer|min:10|max:10000',
 
         ]);
 
-        $path = $request->file('url_imagen')->store('images_eventos');
-
-        // Crear un nuevo evento usando $request->all()
-        $evento = Evento::create($request->all());
-        $evento->url_imagen = $path;
-        $evento->save();
+        if ($request->hasFile('url_imagen')) {
+            // Crear un nuevo evento usando $request->all()
+            $evento = Evento::create($request->all());
+            $path = $request->file('url_imagen')->store('images_eventos');
+            $evento->url_imagen = $path;
+            $evento->save();
+        } else {
+            $evento = new Evento();
+            $evento->nombre = $request->nombre;
+            $evento->descripcion = $request->descripcion;
+            $evento->fecha = $request->fecha;
+            $evento->hora = $request->hora;
+            $evento->ciudad = $request->ciudad;
+            $evento->direccion = $request->direccion;
+            $evento->url_imagen = "";
+            $evento->aforo_maximo = $request->aforo_maximo;
+            $evento->save();
+        }
 
         return redirect()->route('eventos.index');
     }
@@ -70,7 +83,7 @@ class EventoController extends Controller
      */
     public function edit(Evento $evento)
     {
-        return "Formulario de edición de eventos";
+        return view('admin.evento_form', ['evento' => $evento]);
     }
 
     /**
@@ -78,7 +91,30 @@ class EventoController extends Controller
      */
     public function update(Request $request, Evento $evento)
     {
-        return "Evento actualizado";
+        $old_filename = $evento->url_imagen;
+
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'fecha' => 'required|date|after:today',
+            'hora' => 'required|date_format:H:i:s',
+            'aforo_maximo' => 'required|integer|min:10|max:10000',
+        ]);
+
+        $evento->update($request->all());
+
+        //Vuelve a modificar el evento si lleva una imagen en el formulario
+        if ($request->hasFile('url_imagen')) {
+            //Borrar imagen anterior
+            Storage::delete($old_filename);
+            //Guardar la nueva imagen
+            $path = $request->file('url_imagen')->store('images_eventos');
+            $evento->url_imagen = $path;
+            //Modificar el evento
+            $evento->save();
+        }
+
+        return redirect()->route('eventos.index');
     }
 
     /**
@@ -96,12 +132,17 @@ class EventoController extends Controller
         return redirect()->route('eventos.index');;
     }
 
-    ///// API METHODS
+    ///// API METHODS ////////////////////////////////////////////////////////////////
 
     public function api_index()
     {
         return new EventoCollection(Evento::paginate(3));
     }
 
+    public function api_show(Evento $evento)
+    {
+        Log::info('API: Showing the event : {id}', ['id' => $evento->id]);
+        return new EventoResource($evento);
+    }
 
 }

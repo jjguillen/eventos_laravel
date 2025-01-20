@@ -1,12 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 Route::prefix('admin')->group(function () {
     Route::get('/users', function () {
@@ -20,23 +21,20 @@ Route::prefix('admin')->group(function () {
     //Todas las rutas del recurso eventos
     Route::resource('eventos', EventoController::class);
     Route::get('/eventos/delete/{evento}', [EventoController::class, 'delete'])->name('eventos.delete');
-});
 
-Route::prefix('web')->group(function () {
-    Route::get('/users', function () {
-        return "Usuarios - web";
-    })->name('users');
-
-    Route::get('/users/{id}', function ($id) {
-        return "Id: ".$id. " - web";
-    })->whereNumber('id')->name("miruta");
-
-    //Solo añadimos las rutas de eventos de ver todos y ver uno solo
-    Route::get('/eventos', [EventoController::class, 'index']);
-    Route::get('/eventos/{evento}', [EventoController::class, 'show']);
-    Route::get('/eventos/id/{id}', [EventoController::class, 'ver']);
+    //Rutas para ver usuarios
+    Route::get('/users', [UserController::class, 'index'])->name('usuarios.index');
 
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+require __DIR__.'/auth.php';
