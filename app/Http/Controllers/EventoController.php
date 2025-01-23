@@ -16,7 +16,7 @@ class EventoController extends Controller
      */
     public function index()
     {
-        return view('admin.eventos', [ 'eventos' => Evento::all() ]);
+        return view('admin.eventos', [ 'eventos' => Evento::lazy() ]);
     }
 
     /**

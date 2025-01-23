@@ -25,6 +25,9 @@ Route::prefix('admin')->group(function () {
     //Rutas para ver usuarios
     Route::get('/users', [UserController::class, 'index'])->name('usuarios.index');
 
+    //Ruta pruebas Eloquent
+    Route::get("/users/consulta", [UserController::class, 'consulta'])->name('usuarios.consulta');
+
 });
 
 Route::get('/dashboard', function () {
