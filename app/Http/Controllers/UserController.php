@@ -39,8 +39,12 @@ class UserController extends Controller
         //}
 
         //$count = Evento::all()->count();
-        $count = DB::table('eventos')->count();
-        echo $count;
+        //$count = DB::table('eventos')->count();
+        //echo $count;
+
+        $user = User::find(3);
+        $eventos = $user->eventos;
+        return $eventos;
 
 
     }

@@ -24,6 +24,7 @@ class EventoFactory extends Factory
             'ciudad' => $this->faker->city(),
             'direccion' => $this->faker->address(),
             'url_imagen' => $this->faker->imageUrl(),
+            'categoria_id' => $this->faker->numberBetween(1, 4),
             'aforo_maximo' => $this->faker->numberBetween(1, 1000),
         ];
     }

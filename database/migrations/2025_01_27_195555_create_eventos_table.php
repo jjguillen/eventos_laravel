@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("direccion");
             $table->string("url_imagen");
             $table->integer("aforo_maximo");
+            $table->foreignId('categoria_id')->constrained('categorias');
             $table->timestamps();
         });
     }
