@@ -8,6 +8,7 @@ use App\Models\Categoria;
 use App\Models\Evento;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +19,14 @@ class EventoController extends Controller
      */
     public function index()
     {
-        return view('admin.eventos', [ 'eventos' => Evento::lazy() ]);
+        if (Cache::has('eventos')) {
+            return view('admin.eventos', [ 'eventos' => cache('eventos') ]);
+        } else {
+            $eventos = Evento::all();
+            cache()->put('eventos', $eventos);
+            return view('admin.eventos', [ 'eventos' => cache('eventos') ]);
+        }
+
     }
 
     /**
@@ -63,6 +71,11 @@ class EventoController extends Controller
             $evento->categoria_id = $request->categoria_id;
             $evento->save();
         }
+
+        //Cachear los eventos cuando se crea uno nuevo
+        //$eventos = Evento::all();
+        //cache()->put('eventos', $eventos);
+
 
         return redirect()->route('eventos.index');
     }
