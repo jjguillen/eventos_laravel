@@ -22,6 +22,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('eventos', EventoController::class);
     Route::get('/eventos/delete/{evento}', [EventoController::class, 'delete'])->name('eventos.delete');
     Route::get('/eventos/inscritos/{evento}', [EventoController::class, 'inscritos'])->name('eventos.inscritos');
+    Route::get('/eventos/inscritos/{evento}/new', [EventoController::class, 'users_insc'])->name('eventos.inscribir');
+    Route::get('/eventos/inscritos/{evento}/inscribir/{usuario}', [EventoController::class, 'inscribir'])->name('eventos.inscribir-usuario');
+    Route::get('/eventos/inscritos/{evento}/desinscribir/{usuario}', [EventoController::class, 'desinscribir'])->name('eventos.desinscribir-usuario');
 
     //Rutas para ver usuarios
     Route::get('/users', [UserController::class, 'index'])->name('usuarios.index');

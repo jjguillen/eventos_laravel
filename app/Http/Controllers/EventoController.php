@@ -6,6 +6,7 @@ use App\Http\Resources\EventoCollection;
 use App\Http\Resources\EventoResource;
 use App\Models\Categoria;
 use App\Models\Evento;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -137,7 +138,34 @@ class EventoController extends Controller
     public function inscritos(Evento $evento)
     {
         $inscritos = $evento->inscritos;
-        return $inscritos;
+        return view('admin.inscritos', ['inscritos' => $inscritos, 'evento' => $evento]);
+    }
+
+    public function users_insc(Evento $evento)
+    {
+        //Pintamos solo los usuarios no inscritos en el evento
+        $users = User::all();
+        $users_inscritos = $evento->inscritos;
+        $users = $users->diff($users_inscritos);
+
+        return view('admin.users_insc', ['evento' => $evento, 'usuarios' => $users]);
+    }
+
+    public function inscribir(Evento $evento, User $usuario)
+    {
+        //Comprobar que no se inscribe un usuario ya inscrito
+        $users_inscritos = $evento->inscritos;
+        if ($users_inscritos->contains($usuario)) {
+            return redirect()->route('eventos.inscritos', ['evento' => $evento]);
+        }
+        $evento->inscritos()->attach($usuario->id);
+        return redirect()->route('eventos.inscritos', ['evento' => $evento]);
+    }
+
+    public function desinscribir(Evento $evento, User $usuario)
+    {
+        $evento->inscritos()->detach($usuario->id);
+        return redirect()->route('eventos.inscritos', ['evento' => $evento]);
     }
 
 
