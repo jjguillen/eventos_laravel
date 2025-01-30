@@ -14,9 +14,14 @@
                 <img src="{{ asset($evento->url_imagen) }}" class="mb-4" />
                 <h3 class="mb-4 text-2xl font-semibold">{{ $evento->nombre }}</h3>
                 <p class="font-light text-gray-500 sm:text-lg">{{ $evento->descripcion }}</p>
-                <div class="flex items-baseline my-8">
+                <div class="flex items-baseline my-4">
+                    <span class="text-gray-800">Categoría: &nbsp;</span>
+                    <span class="text-gray-500"> {{ $evento->categoria->nombre }}</span>
+                </div>
+                <div class="flex items-baseline my-4">
                     <span class="text-gray-500">{{ $evento->fecha }} / {{ $evento->hora }}</span>
                 </div>
+
                 <!-- List -->
                 <ul role="list" class="mb-8 space-y-4 text-left">
                     <li class="flex items-center space-x-3">

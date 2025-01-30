@@ -34,7 +34,7 @@
                 </div>
             </div>
             <x-button identifier="createProductButton" color="blue" ruta="{{ route('eventos.create') }}">
-                Add new product
+                Nuevo evento
             </x-button>
         </div>
 
@@ -49,6 +49,7 @@
                                 <x-table.th color="gray">Descripción</x-table.th>
                                 <x-table.th color="gray">Ciudad</x-table.th>
                                 <x-table.th color="gray">Aforo</x-table.th>
+                                <x-table.th color="gray">Categoría</x-table.th>
                                 <x-table.th color="gray">Acciones</x-table.th>
                             </x-table.thead>
                             <x-table.tbody color="bg-white-200">
@@ -62,6 +63,7 @@
                                     <x-table.td>{{ $evento->fecha }} / {{ $evento->hora }}</x-table.td>
                                     <x-table.td>{{ $evento->ciudad }}</x-table.td>
                                     <x-table.td>{{ $evento->aforo_maximo }}</x-table.td>
+                                    <x-table.td>{{ $evento->categoria->nombre }}</x-table.td>
 
                                     <x-table.td>
                                         <x-button identifier="updateProductButton" color="green" ruta="{{ route('eventos.edit', ['evento' => $evento->id]) }}">
@@ -71,6 +73,10 @@
                                         <x-button identifier="deleteProductButton" color="red" ruta="{{ route('eventos.delete' , ['evento' => $evento->id]) }}">
                                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                                             Delete
+                                        </x-button>
+                                        <x-button identifier="inscritosButton" color="yellow" ruta="{{ route('eventos.inscritos' , ['evento' => $evento->id]) }}">
+                                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                                            Inscritos
                                         </x-button>
                                     </x-table.td>
                                 </x-table.tr>

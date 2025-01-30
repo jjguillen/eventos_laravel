@@ -21,6 +21,7 @@ Route::prefix('admin')->group(function () {
     //Todas las rutas del recurso eventos
     Route::resource('eventos', EventoController::class);
     Route::get('/eventos/delete/{evento}', [EventoController::class, 'delete'])->name('eventos.delete');
+    Route::get('/eventos/inscritos/{evento}', [EventoController::class, 'inscritos'])->name('eventos.inscritos');
 
     //Rutas para ver usuarios
     Route::get('/users', [UserController::class, 'index'])->name('usuarios.index');

@@ -12,7 +12,7 @@ class Evento extends Model
     /** @use HasFactory<\Database\Factories\EventoFactory> */
     use HasFactory;
 
-    protected $fillable = ['nombre', 'descripcion','ciudad', 'direccion', 'fecha', 'hora', 'url_imagen', 'aforo_maximo'];
+    protected $fillable = ['nombre', 'descripcion','ciudad', 'direccion', 'fecha', 'hora', 'url_imagen', 'aforo_maximo', 'categoria_id'];
 
     public function categoria(): BelongsTo
     {

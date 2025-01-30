@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\EventoCollection;
 use App\Http\Resources\EventoResource;
+use App\Models\Categoria;
 use App\Models\Evento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -24,7 +25,7 @@ class EventoController extends Controller
      */
     public function create()
     {
-        return view('admin.evento_form');
+        return view('admin.evento_form', ['categorias' => Categoria::all() ]);
     }
 
     /**
@@ -58,6 +59,7 @@ class EventoController extends Controller
             $evento->direccion = $request->direccion;
             $evento->url_imagen = "";
             $evento->aforo_maximo = $request->aforo_maximo;
+            $evento->categoria_id = $request->categoria_id;
             $evento->save();
         }
 
@@ -83,7 +85,7 @@ class EventoController extends Controller
      */
     public function edit(Evento $evento)
     {
-        return view('admin.evento_form', ['evento' => $evento]);
+        return view('admin.evento_form', ['evento' => $evento, 'categorias' => Categoria::all()]);
     }
 
     /**
@@ -131,6 +133,14 @@ class EventoController extends Controller
         Evento::destroy($evento->id);
         return redirect()->route('eventos.index');;
     }
+
+    public function inscritos(Evento $evento)
+    {
+        $inscritos = $evento->inscritos;
+        return $inscritos;
+    }
+
+
 
     ///// API METHODS ////////////////////////////////////////////////////////////////
 

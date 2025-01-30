@@ -20,6 +20,7 @@
             <x-form.input tipo="time" nombre="hora" label="Hora" required="required" valor="{{ $evento->hora ?? '' }}"/>
             <x-form.input tipo="file" nombre="url_imagen" label="Imagen" required="" valor="{{ $evento->url_imagen ?? '' }}"/>
             <x-form.input tipo="number" nombre="aforo_maximo" label="Aforo máximo" required="required" valor="{{ $evento->aforo_maximo ?? '' }}"/>
+            <x-form.select nombre="categoria_id" label="Categoría" required="required" :opciones="$categorias" valor="{{ $evento->categoria_id ?? '' }}"/>
             <x-form.button />
         </x-form>
 
