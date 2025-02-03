@@ -19,6 +19,7 @@ class EventoController extends Controller
      */
     public function index()
     {
+        /*
         if (Cache::has('eventos')) {
             return view('admin.eventos', [ 'eventos' => cache('eventos') ]);
         } else {
@@ -26,6 +27,8 @@ class EventoController extends Controller
             cache()->put('eventos', $eventos);
             return view('admin.eventos', [ 'eventos' => cache('eventos') ]);
         }
+        */
+        return view('admin.eventos', ['eventos' => Evento::all()]);
 
     }
 
