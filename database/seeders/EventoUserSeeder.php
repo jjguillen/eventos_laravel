@@ -16,7 +16,7 @@ class EventoUserSeeder extends Seeder
         for ($i = 1; $i <= 20; $i++) {
             DB::table('event_user')->insert([
                 'event_id' => rand(1, 99), // ID del post
-                'user_id' => rand(3, 5),  // ID del tag
+                'user_id' => rand(1, 3),  // ID del tag
             ]);
         }
     }
